@@ -1,0 +1,7 @@
+git_php:
+    resource: "@GitPhpBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
+

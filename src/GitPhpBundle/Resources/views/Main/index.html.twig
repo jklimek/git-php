@@ -1,0 +1,17 @@
+{#{{ filesList }}#}
+{{ status }}
+
+{% if filesList %}
+    <div id="files">
+        <ul>
+            {% for key,file in filesList %}
+                {% if file is iterable %}
+                    {% include "GitPhpBundle:Main:tree.html.twig" with {'file': file} %}
+                {% else %}
+                    <li>{{ file }}</li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

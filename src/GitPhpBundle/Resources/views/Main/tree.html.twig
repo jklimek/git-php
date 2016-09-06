@@ -1,0 +1,11 @@
+<li><h4>{{ key }}</h4>
+    <ul>
+        {% for key,subfile in file %}
+            {% if subfile is iterable %}
+                {% include "GitPhpBundle:Main:tree.html.twig" with {'file': subfile} %}
+            {% else %}
+                <li>{{ subfile }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</li>
