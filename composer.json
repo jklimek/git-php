@@ -1,0 +1,17 @@
+{
+  "name": "JakubKlimek/git-php",
+  "description": "Small PHP project for managing files in git repository.",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Jakub Klimek",
+      "email": "klimek.jakub@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "symfony/symfony": "2.8.*",
+    "twbs/bootstrap": "3.*"
+  }
+}
