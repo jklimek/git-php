@@ -16,6 +16,7 @@ class MainController extends Controller
     public function indexAction()
     {
         $status = $this->get("git_php.service.handler")->showStatus();
+        dump($status);
         $repoFilesList = $this->get("git_php.service.handler")->listFiles();
 
         return [

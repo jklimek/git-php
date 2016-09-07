@@ -1,17 +1,33 @@
-{#{{ filesList }}#}
-{{ status }}
+{% extends 'GitPhpBundle:Main:base.html.twig' %}
 
-{% if filesList %}
-    <div id="files">
-        <ul>
-            {% for key,file in filesList %}
-                {% if file is iterable %}
-                    {% include "GitPhpBundle:Main:tree.html.twig" with {'file': file} %}
-                {% else %}
-                    <li>{{ file }}</li>
+
+{% block body %}
+
+    {#{{ filesList }}#}
+    {#{{ status }}#}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                {% if filesList %}
+                    <div class="files-list">
+                        <ul>
+                            {% for key,file in filesList %}
+                                {% if file is iterable %}
+                                    {% include "GitPhpBundle:Main:tree.html.twig" with {'file': file, 'parent': key} %}
+                                {% else %}
+                                    <li data-path="{{ file }}">{{ file }}</li>
+                                {% endif %}
+
+                            {% endfor %}
+                        </ul>
+                    </div>
                 {% endif %}
-
-            {% endfor %}
-        </ul>
+            </div>
+        </div>
     </div>
-{% endif %}
+
+
+
+
+{% endblock %}

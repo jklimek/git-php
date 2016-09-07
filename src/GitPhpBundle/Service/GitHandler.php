@@ -39,7 +39,8 @@ class GitHandler
                     }
                     $tmpFileListArray = &$tmpFileListArray[$filePathArray[$i - 1]];
                 }
-                $tmpFileListArray[] = ["file" => $filePathArray[$i-1], "filePathString" => $filePathString];
+//                $tmpFileListArray[] = ["file" => $filePathArray[$i-1], "filePathString" => $filePathString];
+                $tmpFileListArray[] = $filePathArray[$i-1];
             }
         }
         dump($filesListArray);
@@ -48,7 +49,9 @@ class GitHandler
 
     public function showStatus($html = false)
     {
-        return $this->repo->status($html);
+        $statusStringRaw = $this->repo->status($html);
+        $statusString = preg_replace("/\n/", "<br/>", $statusStringRaw);
+        return $statusString;
     }
 
 }

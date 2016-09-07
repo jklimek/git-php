@@ -1,10 +1,10 @@
-<li><h4>{{ key }}</h4>
-    <ul>
+<li><p id="folder_{{ parent | replace({'/': '_'}) }}" class="list-folder-header" data-path="{{ parent }}">{{ key }}/</p>
+    <ul id="list_{{ parent | replace({'/': '_'}) }}" class="list-folder-container">
         {% for key,subfile in file %}
             {% if subfile is iterable %}
-                {% include "GitPhpBundle:Main:tree.html.twig" with {'file': subfile} %}
+                {% include "GitPhpBundle:Main:tree.html.twig" with {'file': subfile, 'parent': parent ~ "/" ~ key} %}
             {% else %}
-                <li>{{ subfile }}</li>
+                <li data-path="{{ parent ~ "/" ~ subfile }}">{{ subfile }}</li>
             {% endif %}
         {% endfor %}
     </ul>

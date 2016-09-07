@@ -2027,12 +2027,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "2ce310fc2ac9140defef7134b95fb940efb2f397"
+                "reference": "69afe99f45650afe77f0048b08bedbf75be888e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/2ce310fc2ac9140defef7134b95fb940efb2f397",
-                "reference": "2ce310fc2ac9140defef7134b95fb940efb2f397",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/69afe99f45650afe77f0048b08bedbf75be888e1",
+                "reference": "69afe99f45650afe77f0048b08bedbf75be888e1",
                 "shasum": ""
             },
             "require": {
@@ -2153,7 +2153,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-09-06 16:53:53"
+            "time": "2016-09-07 02:58:32"
         },
         {
             "name": "twbs/bootstrap",

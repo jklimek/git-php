@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="Author" content="Jakub Klimek">
+    {#<meta name="viewport" content="width=device-width" />#}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title"
+          content="GitPhp - Web Tool" />
+
+    <title>{% block title %}GitPhp - Web Tool{% endblock %}</title>
+    {% block stylesheets %}
+        {% stylesheets filter='cssrewrite'
+        'https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css'
+        '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css'
+        '@GitPhpBundle/Resources/web/css/custom.css'
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'
+
+        %}
+        <link type="text/css" rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800,300italic' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+{% block body %}{% endblock %}
+{% include 'GitPhpBundle:Main:footer.html.twig' %}
+{% block javascripts %}{% endblock %}
+
+{% javascripts output="js/app.js"
+'@GitPhpBundle/Resources/web/js/jquery-2.1.4.min.js'
+'%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js'
+'@GitPhpBundle/Resources/web/js/custom.js'
+
+
+%}
+<script src="{{ asset_url }}"></script>
+
+{% endjavascripts %}
+</body>
+</html>
