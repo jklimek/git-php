@@ -4,7 +4,12 @@
             {% if subfile is iterable %}
                 {% include "GitPhpBundle:Main:tree.html.twig" with {'file': subfile, 'parent': parent ~ "/" ~ key} %}
             {% else %}
-                <li data-path="{{ parent ~ "/" ~ subfile }}">{{ subfile }}</li>
+                <li class="file-element">
+                    {{ subfile }}
+                    <div class="file-options" data-path="{{ parent ~ "/" ~ subfile }}" >
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>
+                </li>
             {% endif %}
         {% endfor %}
     </ul>

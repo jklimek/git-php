@@ -38,6 +38,15 @@ a:hover {
 
 }
 
+
+.file-name-input, .file-body-input{
+    width: 100%;
+}
+
+.file-body-input {
+    height: 400px;
+}
+
 .files-list ul {
     list-style-type: none;
     padding-left: 20px;
@@ -52,6 +61,14 @@ p.list-folder-header {
     font-weight: 700;
     margin: 0;
     cursor: pointer;
+}
+.file-element {
+    cursor: pointer;
+    /*display: inline;*/
+}
+
+.file-options {
+    display: inline;
 }
 
 .modified-file {

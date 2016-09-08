@@ -12,13 +12,19 @@
             <div class="col-lg-12">
                 <h2><strong>{{ activeBranch }}</strong> files tree</h2>
                 {% if filesLists.filesTree %}
-                    <div class="files-list">
+                    <div class="editFiles-list">
                         <ul>
                             {% for key,file in filesLists.filesTree %}
                                 {% if file is iterable %}
                                     {% include "GitPhpBundle:Main:tree.html.twig" with {'file': file, 'parent': key} %}
                                 {% else %}
-                                    <li data-path="{{ file }}">{{ file }}</li>
+                                    <li class="file-element">
+                                        {{ file }}
+                                        <div class="file-options" data-path="{{ file }}">
+                                            <i class="fa fa-pencil-square-o edit-action" aria-hidden="true"></i><i
+                                                    class="fa fa-trash delete-action" aria-hidden="true"></i>
+                                        </div>
+                                    </li>
                                 {% endif %}
 
                             {% endfor %}
@@ -55,5 +61,40 @@
 
 
 
+    <!-- Modal -->
+    <div class="modal fade" id="editFileModal" tabindex="-1" role="dialog" aria-labelledby="editFileModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addFileModalLabel">Edit file</h4>
+                </div>
+                <form action="{{ path("gitphp_main_addfile") }}" method="POST">
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <h4>File name</h4>
+                                <strong><p id="editFileNameInput" class="file-name-input"></p></strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4>File body</h4>
+                                <textarea name="editFileBody" title="File body" id="editFileBodyInput"
+                                          class="file-body-input"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Edit File</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

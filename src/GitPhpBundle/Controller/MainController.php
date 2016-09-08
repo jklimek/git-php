@@ -42,14 +42,11 @@ class MainController extends Controller
             "fileBody" => $request->get("fileBody")
         ];
 
-//        $fileDataArray = [
-//            "fileName" => $this->getParameter("repository_path") . "/" . "tests/test1.txt",
-//            "fileBody" => "dupsko"
-//        ];
         $status = $this->get("git_php.service.handler")->addFile($fileDataArray);
 
         return [
-            "status" => $status
+            "status" => $status,
+            "fileDataArray" => $fileDataArray
         ];
     }
 

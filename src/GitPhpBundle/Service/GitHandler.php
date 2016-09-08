@@ -81,9 +81,8 @@ class GitHandler
 
         // Add file to git repo
         $out = $this->repo->add($fileDataArray["fileName"]);
-        dump($out);
 
-        return "ok";
+        return $out;
     }
 
     public function commit($message)
