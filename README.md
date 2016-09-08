@@ -6,7 +6,7 @@ Installation
 =========
 
 Project is written in Symfony2 framework, after pulling repository simply run ```composer install``` to install all the dependencies.
-Composer will ask you for additional app details such as repository-path or database details
+Composer will ask you for additional app details such as repository-path or database details. Proceed as in any standard Symfony installations.
 
 After that you need to install all assets -- run ```php app/console assetic:dump``` to dump them.
 

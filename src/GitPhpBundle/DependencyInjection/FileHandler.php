@@ -6,7 +6,7 @@
  * Time: 19:55
  */
 
-namespace GitPhpBundle\Service;
+namespace GitPhpBundle\DependencyInjection;
 
 use Exception;
 

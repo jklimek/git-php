@@ -7,7 +7,7 @@
  * Time: 21:19
  */
 
-namespace GitPhpBundle\Service;
+namespace GitPhpBundle\DependencyInjection;
 
 use Coyl\Git\Git;
 use Exception;

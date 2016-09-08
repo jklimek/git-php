@@ -1,6 +1,6 @@
 services:
     git_php.service.githandler:
-        class: GitPhpBundle\Service\GitHandler
+        class: GitPhpBundle\DependencyInjection\GitHandler
         arguments: ["%repository_path%", "@git_php.service.filehandler"]
     git_php.service.filehandler:
-        class: GitPhpBundle\Service\FileHandler
+        class: GitPhpBundle\DependencyInjection\FileHandler
