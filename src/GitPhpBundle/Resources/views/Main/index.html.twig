@@ -8,11 +8,13 @@
 
     <div class="container">
         <div class="row">
+
             <div class="col-lg-12">
-                {% if filesList %}
+                <h2><strong>{{ activeBranch }}</strong> files tree</h2>
+                {% if filesLists.filesTree %}
                     <div class="files-list">
                         <ul>
-                            {% for key,file in filesList %}
+                            {% for key,file in filesLists.filesTree %}
                                 {% if file is iterable %}
                                     {% include "GitPhpBundle:Main:tree.html.twig" with {'file': file, 'parent': key} %}
                                 {% else %}
@@ -24,6 +26,30 @@
                     </div>
                 {% endif %}
             </div>
+            {% if filesLists.modifiedFiles|length > 0 %}
+                <div class="col-lg-12">
+                    <h2><strong>{{ activeBranch }}</strong> modified files</h2>
+                    {% for file in filesLists.modifiedFiles %}
+                        <p class="modified-file">{{ file }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if filesLists.newFiles|length > 0 %}
+                <div class="col-lg-12">
+                    <h2><strong>{{ activeBranch }}</strong> new files</h2>
+                    {% for file in filesLists.newFiles %}
+                        <p class="new-file">{{ file }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if filesLists.deletedFiles|length > 0 %}
+                <div class="col-lg-12">
+                    <h2><strong>{{ activeBranch }}</strong> deleted files</h2>
+                    {% for file in filesLists.deletedFiles %}
+                        <p class="deleted-file">{{ file }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
     </div>
 

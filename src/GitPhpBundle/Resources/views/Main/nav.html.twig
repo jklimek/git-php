@@ -1,0 +1,49 @@
+<nav>
+    <div class="container">
+
+        <div class="row nav">
+
+            <div class="col-sm-6">
+                <a class="navbar-logo" href="/">
+                    <i class="fa fa-code-fork" aria-hidden="true"></i> GitPhp
+                </a>
+            </div>
+            <div class="col-sm-6">
+
+                <div class="pull-right">
+                    <button class="btn btn-default" data-toggle="modal"
+                            data-target="#addFileModal" role="button">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add file
+                    </button>
+                    <a class="btn btn-default" href="{{ path('gitphp_main_index') }}" role="button"><i
+                                class="fa fa-list" aria-hidden="true"></i> Files list</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addFileModal" tabindex="-1" role="dialog" aria-labelledby="addFileModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addFileModalLabel">Add file</h4>
+            </div>
+            <form action="{{ path("gitphp_main_addfile") }}" method="POST">
+                <div class="modal-body">
+                    <input type="text" name="fileName" id="fileNameInput" value="">
+                    <textarea name="fileBody" id="fileBodyInput" cols="30" rows="10"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add File</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
