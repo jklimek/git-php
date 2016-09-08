@@ -5,9 +5,10 @@
                 {% include "GitPhpBundle:Main:tree.html.twig" with {'file': subfile, 'parent': parent ~ "/" ~ key} %}
             {% else %}
                 <li class="file-element">
-                    {{ subfile }}
+                    <p class="file-name">{{ subfile }}</p>
                     <div class="file-options" data-path="{{ parent ~ "/" ~ subfile }}" >
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i><i class="fa fa-trash" aria-hidden="true"></i>
+                        <i class="fa fa-pencil-square-o edit-action" aria-hidden="true"></i><i
+                                class="fa fa-trash delete-action" aria-hidden="true"></i>
                     </div>
                 </li>
             {% endif %}

@@ -1,4 +1,6 @@
 services:
-    git_php.service.handler:
+    git_php.service.githandler:
         class: GitPhpBundle\Service\GitHandler
-        arguments: ["%repository_path%"]
+        arguments: ["%repository_path%", "@git_php.service.filehandler"]
+    git_php.service.filehandler:
+        class: GitPhpBundle\Service\FileHandler

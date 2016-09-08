@@ -67,6 +67,11 @@ p.list-folder-header {
     /*display: inline;*/
 }
 
+.file-name {
+    display: inline;
+    margin: 0;
+}
+
 .file-options {
     display: inline;
 }

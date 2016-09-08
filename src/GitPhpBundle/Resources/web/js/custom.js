@@ -20,9 +20,29 @@ $(".file-element").hover(function () {
     $(this).find(".file-options").hide();
 });
 
-
+// Edit file action
 $(".edit-action").click(function () {
-    $('#editFileModal').modal();
-    var fileName = $(this).parent().data("path");
-    $('#editFileNameInput').text(fileName);
+    //Get file path from parent node
+    var filePath = $(this).parent().data("path");
+    var fileBody = "";
+    $('#editFileNameLabel').text(filePath);
+    $('#editFileNameInput').val(filePath);
+    // Perform ajax request to get file body
+    $.ajax({
+        method: "POST",
+        url: "/ajax/getFileBody",
+        data: {filePath: filePath}
+    })
+        // On successful
+        .success(function(data) {
+            // ... and data-correct ajax
+            if (data.status == "OK") {
+                $('#editFileBodyInput').val(data.fileBody);
+                // ... show modal with file name and body input
+                $('#editFileModal').modal();
+            } else if (data.status == "ERROR" ) {
+                alert(data.error);
+            }
+        });
+
 });
