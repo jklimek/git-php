@@ -56,6 +56,30 @@
                     {% endfor %}
                 </div>
             {% endif %}
+            {% if mergeRequests|length > 0 %}
+                <div class="col-lg-12">
+                    <h2>Merge requests</h2>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>id</th>
+                            <th>Source branch</th>
+                            <th>Destination branch</th>
+                            <th>Commit hash</th>
+                            <th>Timestamp</th>
+                        </tr>
+                        {% for mergeRequest in mergeRequests %}
+                            <tr>
+                                <td>{{ mergeRequest.id }}</td>
+                                <td>{{ mergeRequest.sourceBranch }}</td>
+                                <td>{{ mergeRequest.destinationBranch }}</td>
+                                <td>{{ mergeRequest.commitHash }}</td>
+                                <td>{{ mergeRequest.timestamp|date("d/m/Y h:m:s") }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                </div>
+            {% endif %}
         </div>
     </div>
 

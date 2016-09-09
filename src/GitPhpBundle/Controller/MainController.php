@@ -21,13 +21,12 @@ class MainController extends Controller
         $status = $this->get("git_php.service.githandler")->showStatus();
         $filesLists = $this->get("git_php.service.githandler")->listFiles();
         $activeBranch = $this->get("git_php.service.githandler")->getActiveBranch();
-//        $mergeRequests =
-
+        $mergeRequests = $this->getDoctrine()->getManager()->getRepository("GitPhpBundle:MergeRequest")->findAll();
         return [
             "status"       => $status,
             "filesLists"   => $filesLists,
             "activeBranch" => $activeBranch,
-//            "mergeRequests" => $mergeRequests
+            "mergeRequests" => $mergeRequests
         ];
     }
 
