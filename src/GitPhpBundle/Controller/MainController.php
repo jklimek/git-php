@@ -134,21 +134,51 @@ class MainController extends Controller
     {
         $commitMessage = $request->get("commitMessageBody");
 
-
         try {
             $commitOutput = $this->get("git_php.service.githandler")->commit($commitMessage);
-            $fileDataArray = [
-                "status"   => "OK",
+            $dataArray = [
+                "status"       => "OK",
                 "commitOutput" => $commitOutput
             ];
         } catch (Exception $e) {
-            $fileDataArray = [
-                "status"   => "ERROR",
-                "error"    => $e->getMessage()
+            $dataArray = [
+                "status" => "ERROR",
+                "error"  => $e->getMessage()
             ];
         }
 
-        return ["fileDataArray" => $fileDataArray];
+        return ["dataArray" => $dataArray];
+    }
+
+
+    /**
+     * @Route("/mergeRequest")
+     * @Template()
+     * @param Request $request
+     * @return array
+     */
+    public function mergeRequestAction(Request $request)
+    {
+        $mergeRequestRepository = $this->getDoctrine()->getRepository('GitPhpBundle:MergeRequest');
+
+        try {
+            $commitHash = $this->get("git_php.service.githandler")->getLastCommitHash();
+            $sourceBranchName = $request->get("sourceBranchName");
+
+            // Create merge request entity
+            $mergeRequestRepository->createMergeRequest($sourceBranchName, $commitHash);
+
+            $dataArray = [
+                "status" => "OK",
+            ];
+        } catch (Exception $e) {
+            $dataArray = [
+                "status" => "ERROR",
+                "error"  => $e->getMessage()
+            ];
+        }
+
+        return ["dataArray" => $dataArray];
     }
 
     /**
@@ -160,7 +190,7 @@ class MainController extends Controller
     {
         $filePath = $this->getParameter("repository_path") . "/" . $request->get("filePath");
         try {
-            $fileArray = [
+            $fileDataArray = [
                 "status"   => "OK",
                 "filePath" => $filePath,
                 "fileBody" => $this->get("git_php.service.filehandler")->getFileBody($filePath)
@@ -173,7 +203,7 @@ class MainController extends Controller
             ]);
         }
 
-        return new JsonResponse($fileArray);
+        return new JsonResponse($fileDataArray);
     }
 
 }

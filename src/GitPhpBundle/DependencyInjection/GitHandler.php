@@ -40,6 +40,16 @@ class GitHandler
     }
 
     /**
+     * Method returns active branch name
+     *
+     * @return string Active branch name
+     */
+    public function getLastCommitHash()
+    {
+        return $this->repo->run("log -1 --format='%H'");
+    }
+
+    /**
      * Generate array with files list
      * repo files, modified files, new files and deleted files respectively
      *
