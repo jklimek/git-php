@@ -72,22 +72,23 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="commitModalLabel">Add file</h4>
+                <h4 class="modal-title" id="commitModalLabel">Commit</h4>
             </div>
             <form action="{{ path("gitphp_main_addfile") }}" method="POST">
                 <div class="modal-body">
                     <div class="row">
 
                         <div class="col-lg-12">
-                            <h4>File name</h4>
-                            <input type="text" name="fileName" id="fileNameInput" class="file-name-input" value=""
-                                   placeholder="Enter file name with extension">
+                            <h4>Files list</h4>
+                            <strong><p id="filesListLabel" class="file-name-input"></p></strong>
+                            {#<input type="text" name="fileName" id="fileNameInput" class="file-name-input" value=""#}
+                                   {#placeholder="Enter file name with extension">#}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <h4>File body</h4>
-                            <textarea name="fileBody" title="File body" id="fileBodyInput" class="file-body-input"></textarea>
+                            <h4>Commit message</h4>
+                            <textarea name="commitMessageBody" title="Commit message body" id="commitMessageBodyInput" class="file-body-input"></textarea>
                         </div>
                     </div>
 

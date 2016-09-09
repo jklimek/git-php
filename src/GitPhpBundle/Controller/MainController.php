@@ -89,7 +89,6 @@ class MainController extends Controller
             ];
         }
 
-        dump($fileDataArray);
         return ["fileDataArray" => $fileDataArray];
     }
     /**
@@ -101,16 +100,16 @@ class MainController extends Controller
     public function removeFileAction(Request $request)
     {
         $inputFileDataArray = [
-            "filePath" => $this->getParameter("repository_path") . "/" . $request->get("fileName"),
-            "fileBody" => $request->get("fileBody")
+            "filePath" => $this->getParameter("repository_path") . "/" . $request->get("fileName")
         ];
 
+        dump($inputFileDataArray);
+
         try {
-            $this->get("git_php.service.filehandler")->removeFile($inputFileDataArray);
+            $this->get("git_php.service.githandler")->removeFile($inputFileDataArray["filePath"]);
             $fileDataArray = [
                 "status"   => "OK",
-                "filePath" => $inputFileDataArray["filePath"],
-                "fileBody" => $this->get("git_php.service.filehandler")->getFileBody($inputFileDataArray["filePath"])
+                "filePath" => $inputFileDataArray["filePath"]
             ];
         } catch (Exception $e) {
             $fileDataArray = [

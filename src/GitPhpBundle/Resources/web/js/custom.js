@@ -24,7 +24,6 @@ $(".file-element").hover(function () {
 $(".edit-action").click(function () {
     //Get file path from parent node
     var filePath = $(this).parent().data("path");
-    var fileBody = "";
     $('#editFileNameLabel').text(filePath);
     $('#editFileNameInput').val(filePath);
     // Perform ajax request to get file body
@@ -47,5 +46,8 @@ $(".edit-action").click(function () {
 });
 
 $(".remove-action").click(function() {
-    console.log(this);
+    var filePath = $(this).parent().data("path");
+    $('#removeFileNameLabel').text(filePath);
+    $('#removeFileNameInput').val(filePath);
+    $('#removeFileModal').modal();
 });

@@ -118,6 +118,24 @@ class GitHandler
     }
 
     /**
+     * Method removes safely file from repo
+     *
+     * @param array $filePath File path
+     * @return string git output
+     * @throws \Exception
+     */
+    public function removeFile($filePath)
+    {
+        try {
+            // Remove file from git repo
+            $this->repo->run("rm --cached $filePath");
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+
+    }
+
+    /**
      * Performs git commit with given $message
      *
      * @param string $message Git commit message
