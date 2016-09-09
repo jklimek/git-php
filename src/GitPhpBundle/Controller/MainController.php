@@ -103,7 +103,6 @@ class MainController extends Controller
             "filePath" => $this->getParameter("repository_path") . "/" . $request->get("fileName")
         ];
 
-        dump($inputFileDataArray);
 
         try {
             $this->get("git_php.service.githandler")->removeFile($inputFileDataArray["filePath"]);
@@ -119,7 +118,6 @@ class MainController extends Controller
             ];
         }
 
-        dump($fileDataArray);
         return ["fileDataArray" => $fileDataArray];
     }
 
