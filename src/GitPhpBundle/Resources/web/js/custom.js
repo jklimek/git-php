@@ -45,9 +45,57 @@ $(".edit-action").click(function () {
         });
 });
 
+// Remove file action
 $(".remove-action").click(function() {
     var filePath = $(this).parent().data("path");
     $('#removeFileNameLabel').text(filePath);
     $('#removeFileNameInput').val(filePath);
     $('#removeFileModal').modal();
+});
+
+
+// Merge request action
+$("#mergeRequestButton").click(function() {
+    console.log(this);
+    $.ajax({
+            method: "POST",
+            url: "/ajax/getBranches"
+        })
+        // On successful
+        .success(function(data) {
+            // ... and data-correct ajax
+            if (data.status == "OK") {
+                var branchesOptions = "";
+                for (var i = 0; i < data.branches.length; i++) {
+                    var disabled = "";
+                    if (data.branches[i].substr(0,1) == "*") {
+                        disabled = "disabled";
+                    }
+                    branchesOptions += "<option"+disabled+">"+data.branches[i]+"</option>";
+                }
+                $("#branchesListSelect").html(branchesOptions);
+
+            } else if (data.status == "ERROR" ) {
+                alert(data.error);
+            }
+        });
+    $.ajax({
+            method: "POST",
+            url: "/ajax/getActiveBranch"
+        })
+        // On successful
+        .success(function(data) {
+            // ... and data-correct ajax
+            if (data.status == "OK") {
+                $("#mergeRequestNameLabel").text(data.branch);
+                $("#mergeRequestNameInput").val(data.branch);
+
+            } else if (data.status == "ERROR" ) {
+                alert(data.error);
+            }
+        });
+
+
+    $('#mergeRequestModal').modal();
+
 });

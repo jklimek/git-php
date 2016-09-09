@@ -10,6 +10,7 @@
 namespace GitPhpBundle\DependencyInjection;
 
 use Coyl\Git\Git;
+use Coyl\Git\GitRepo;
 use Exception;
 
 class GitHandler
@@ -175,6 +176,15 @@ class GitHandler
             return $e->getMessage();
         }
 
+    }
+
+    public function getBranches($keepAsterisk = true)
+    {
+        try {
+            return $this->repo->branches(GitRepo::BRANCH_LIST_MODE_LOCAL, $keepAsterisk);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
 }

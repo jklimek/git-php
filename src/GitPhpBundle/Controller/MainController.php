@@ -206,4 +206,48 @@ class MainController extends Controller
         return new JsonResponse($fileDataArray);
     }
 
+    /**
+     * @Route("/ajax/getBranches")
+     * @return array
+     */
+    public function getBranchesAjaxAction()
+    {
+        $branches = $this->get("git_php.service.githandler")->getBranches();
+        try {
+            $fileDataArray = [
+                "status"   => "OK",
+                "branches" => $branches,
+            ];
+        } catch (Exception $e) {
+            return new JsonResponse([
+                "status"   => "ERROR",
+                "error"    => $e->getMessage()
+            ]);
+        }
+
+        return new JsonResponse($fileDataArray);
+    }
+
+    /**
+     * @Route("/ajax/getActiveBranch")
+     * @return array
+     */
+    public function getActiveBranchAjaxAction()
+    {
+        $branch = $this->get("git_php.service.githandler")->getActiveBranch();
+        try {
+            $fileDataArray = [
+                "status"   => "OK",
+                "branches" => $branch,
+            ];
+        } catch (Exception $e) {
+            return new JsonResponse([
+                "status"   => "ERROR",
+                "error"    => $e->getMessage()
+            ]);
+        }
+
+        return new JsonResponse($fileDataArray);
+    }
+
 }
