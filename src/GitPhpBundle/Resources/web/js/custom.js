@@ -44,5 +44,8 @@ $(".edit-action").click(function () {
                 alert(data.error);
             }
         });
+});
 
+$(".remove-action").click(function() {
+    console.log(this);
 });

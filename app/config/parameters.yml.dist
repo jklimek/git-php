@@ -11,4 +11,4 @@ parameters:
     repository_path:    ~
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            98765rytfed3vrf87325ntv33y34or4t3b9uv893bur3

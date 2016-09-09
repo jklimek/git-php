@@ -7,17 +7,14 @@
         <div class="row">
             {% if fileDataArray.status == "OK" %}
                 <div class="col-lg-12">
-                    <h2>Edited <strong>{{ fileDataArray.filePath }}</strong> file!</h2>
-                </div>
-                <div class="col-lg-12">
-                    <pre>{{ fileDataArray.fileBody }}</pre>
+                    <h2>Removed <strong>{{ fileDataArray.filePath }}</strong> file from repository!</h2>
                 </div>
                 <div class="col-lg-12 text-center">
-                    <h1><i class="fa fa-check-circle-o fa-3x text-success" aria-hidden="true"></i></h1>
+                    <h1><i class="fa fa-list fa-3x text-success" aria-hidden="true"></i></h1>
                 </div>
             {% else %}
                 <div class="col-lg-12">
-                    <h2>Error editing <strong>{{ fileDataArray.filePath }}</strong> file!</h2>
+                    <h2>Error removing <strong>{{ fileDataArray.filePath }}</strong> file!</h2>
                 </div>
                 <div class="col-lg-12">
                     <pre>{{ fileDataArray.error }}</pre>

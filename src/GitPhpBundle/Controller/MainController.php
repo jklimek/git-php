@@ -16,12 +16,11 @@ class MainController extends Controller
      * @Template()
      *
      */
-    public function indexAction()
+    public function listAction()
     {
         $status = $this->get("git_php.service.githandler")->showStatus();
         $filesLists = $this->get("git_php.service.githandler")->listFiles();
         $activeBranch = $this->get("git_php.service.githandler")->getActiveBranch();
-        dump($filesLists);
 
         return [
             "status"       => $status,
@@ -39,17 +38,27 @@ class MainController extends Controller
      */
     public function addFileAction(Request $request)
     {
-        $fileDataArray = [
+        $inputFileDataArray = [
             "filePath" => $this->getParameter("repository_path") . "/" . $request->get("fileName"),
             "fileBody" => $request->get("fileBody")
         ];
 
-        $status = $this->get("git_php.service.githandler")->addFile($fileDataArray);
+        try {
+            $this->get("git_php.service.githandler")->addFile($inputFileDataArray);
+            $fileDataArray = [
+                "status"   => "OK",
+                "filePath" => $inputFileDataArray["filePath"],
+                "fileBody" => $this->get("git_php.service.filehandler")->getFileBody($inputFileDataArray["filePath"])
+            ];
+        } catch (Exception $e) {
+            $fileDataArray = [
+                "status"   => "ERROR",
+                "filePath" => $inputFileDataArray["filePath"],
+                "error"    => $e->getMessage()
+            ];
+        }
 
-        return [
-            "status"        => $status,
-            "fileDataArray" => $fileDataArray
-        ];
+        return ["fileDataArray" => $fileDataArray];
     }
 
     /**
@@ -67,6 +76,37 @@ class MainController extends Controller
 
         try {
             $this->get("git_php.service.filehandler")->editFile($inputFileDataArray);
+            $fileDataArray = [
+                "status"   => "OK",
+                "filePath" => $inputFileDataArray["filePath"],
+                "fileBody" => $this->get("git_php.service.filehandler")->getFileBody($inputFileDataArray["filePath"])
+            ];
+        } catch (Exception $e) {
+            $fileDataArray = [
+                "status"   => "ERROR",
+                "filePath" => $inputFileDataArray["filePath"],
+                "error"    => $e->getMessage()
+            ];
+        }
+
+        dump($fileDataArray);
+        return ["fileDataArray" => $fileDataArray];
+    }
+    /**
+     * @Route("/remove")
+     * @Template()
+     * @param Request $request
+     * @return array
+     */
+    public function removeFileAction(Request $request)
+    {
+        $inputFileDataArray = [
+            "filePath" => $this->getParameter("repository_path") . "/" . $request->get("fileName"),
+            "fileBody" => $request->get("fileBody")
+        ];
+
+        try {
+            $this->get("git_php.service.filehandler")->removeFile($inputFileDataArray);
             $fileDataArray = [
                 "status"   => "OK",
                 "filePath" => $inputFileDataArray["filePath"],

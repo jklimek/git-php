@@ -106,13 +106,15 @@ class GitHandler
      */
     public function addFile($fileDataArray)
     {
-        // Create file in the filesystem
-        $this->fileHandlerService->createFile($fileDataArray);
+        try {// Create file in the filesystem
+            $this->fileHandlerService->createFile($fileDataArray);
 
-        // Add file to git repo
-        $out = $this->repo->add($fileDataArray["fileName"]);
+            // Add file to git repo
+            $this->repo->add($fileDataArray["filePath"]);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
 
-        return $out;
     }
 
     /**

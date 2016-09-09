@@ -8,15 +8,27 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <h2>Added <strong>{{ fileDataArray.filePath }}</strong> file to repo!</h2>
-            </div>
-            <div class="col-lg-12">
-                <pre>{{ fileDataArray.fileBody }}</pre>
-            </div>
-            <div class="col-lg-12 text-center">
-                <h1><i class="fa fa-check-circle-o fa-3x text-success" aria-hidden="true"></i></h1>
-            </div>
+            {% if fileDataArray.status == "OK" %}
+                <div class="col-lg-12">
+                    <h2>Added <strong>{{ fileDataArray.filePath }}</strong> file to repo!</h2>
+                </div>
+                <div class="col-lg-12">
+                    <pre>{{ fileDataArray.fileBody }}</pre>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <h1><i class="fa fa-check-circle-o fa-3x text-success" aria-hidden="true"></i></h1>
+                </div>
+            {% else %}
+                <div class="col-lg-12">
+                    <h2>Error adding <strong>{{ fileDataArray.filePath }}</strong> file!</h2>
+                </div>
+                <div class="col-lg-12">
+                    <pre>{{ fileDataArray.error }}</pre>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <h1><i class="fa fa-times-circle fa-3x text-danger" aria-hidden="true"></i></h1>
+                </div>
+            {% endif %}
         </div>
     </div>
 
