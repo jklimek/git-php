@@ -47,7 +47,7 @@ class GitHandler
      */
     public function getLastCommitHash()
     {
-        return $this->repo->run("log -1 --format='%H'");
+        return $this->repo->run("rev-parse HEAD");
     }
 
     /**

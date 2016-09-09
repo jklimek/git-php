@@ -14,18 +14,20 @@ class MainController extends Controller
     /**
      * @Route("/")
      * @Template()
-     *
+     * @return array
      */
     public function listAction()
     {
         $status = $this->get("git_php.service.githandler")->showStatus();
         $filesLists = $this->get("git_php.service.githandler")->listFiles();
         $activeBranch = $this->get("git_php.service.githandler")->getActiveBranch();
+//        $mergeRequests =
 
         return [
             "status"       => $status,
             "filesLists"   => $filesLists,
-            "activeBranch" => $activeBranch
+            "activeBranch" => $activeBranch,
+//            "mergeRequests" => $mergeRequests
         ];
     }
 
@@ -164,12 +166,16 @@ class MainController extends Controller
         try {
             $commitHash = $this->get("git_php.service.githandler")->getLastCommitHash();
             $sourceBranchName = $request->get("sourceBranchName");
+            $destinationBranchName = $request->get("destinationBranchName");
 
             // Create merge request entity
-            $mergeRequestRepository->createMergeRequest($sourceBranchName, $commitHash);
+            $mergeRequestRepository->createMergeRequest($sourceBranchName, $commitHash, $destinationBranchName);
 
             $dataArray = [
                 "status" => "OK",
+                "commitHash" => $commitHash,
+                "sourceBranchName" => $sourceBranchName,
+                "destinationBranchName" => $destinationBranchName
             ];
         } catch (Exception $e) {
             $dataArray = [
@@ -234,11 +240,11 @@ class MainController extends Controller
      */
     public function getActiveBranchAjaxAction()
     {
-        $branch = $this->get("git_php.service.githandler")->getActiveBranch();
+
         try {
             $fileDataArray = [
                 "status"   => "OK",
-                "branches" => $branch,
+                "branch" => $this->get("git_php.service.githandler")->getActiveBranch(),
             ];
         } catch (Exception $e) {
             return new JsonResponse([

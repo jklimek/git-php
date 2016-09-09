@@ -61,9 +61,7 @@ $("#mergeRequestButton").click(function() {
             method: "POST",
             url: "/ajax/getBranches"
         })
-        // On successful
         .success(function(data) {
-            // ... and data-correct ajax
             if (data.status == "OK") {
                 var branchesOptions = "";
                 for (var i = 0; i < data.branches.length; i++) {
@@ -83,9 +81,7 @@ $("#mergeRequestButton").click(function() {
             method: "POST",
             url: "/ajax/getActiveBranch"
         })
-        // On successful
         .success(function(data) {
-            // ... and data-correct ajax
             if (data.status == "OK") {
                 $("#mergeRequestNameLabel").text(data.branch);
                 $("#mergeRequestNameInput").val(data.branch);

@@ -27,9 +27,14 @@ class MergeRequestRepository extends \Doctrine\ORM\EntityRepository
         $mergeRequest->setSourceBranch($sourceBranchName);
         $mergeRequest->setCommitHash($commitHash);
         $mergeRequest->setDestinationBranch($destinationBranchName);
-
+        $mergeRequest->setTimestamp();
         $em->persist($mergeRequest);
         $em->flush();
         $em->clear();
+    }
+
+    public function getMergeRequests()
+    {
+        $em = $this->getEntityManager();
     }
 }
