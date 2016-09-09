@@ -91,6 +91,8 @@ class MainController extends Controller
 
         return ["fileDataArray" => $fileDataArray];
     }
+
+
     /**
      * @Route("/remove")
      * @Template()
@@ -114,6 +116,34 @@ class MainController extends Controller
             $fileDataArray = [
                 "status"   => "ERROR",
                 "filePath" => $inputFileDataArray["filePath"],
+                "error"    => $e->getMessage()
+            ];
+        }
+
+        return ["fileDataArray" => $fileDataArray];
+    }
+
+
+    /**
+     * @Route("/commit")
+     * @Template()
+     * @param Request $request
+     * @return array
+     */
+    public function commitAction(Request $request)
+    {
+        $commitMessage = $request->get("commitMessageBody");
+
+
+        try {
+            $commitOutput = $this->get("git_php.service.githandler")->commit($commitMessage);
+            $fileDataArray = [
+                "status"   => "OK",
+                "commitOutput" => $commitOutput
+            ];
+        } catch (Exception $e) {
+            $fileDataArray = [
+                "status"   => "ERROR",
                 "error"    => $e->getMessage()
             ];
         }
