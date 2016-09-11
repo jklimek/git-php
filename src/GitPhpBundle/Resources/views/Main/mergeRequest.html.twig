@@ -1,10 +1,5 @@
 {% extends 'GitPhpBundle:Main:base.html.twig' %}
-
-
 {% block body %}
-
-    {#{{ filesList }}#}
-    {#{{ status }}#}
 
     <div class="container">
         <div class="row">
@@ -13,8 +8,14 @@
                     <h2>Merge request saved!</h2>
                 </div>
                 <div class="col-lg-12">
-                    <strong><h3>{{ dataArray.sourceBranchName }} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ dataArray.destinationBranchName }}</h3></strong>
-                    <h3>Commit: <strong>{{ dataArray.commitHash }}</strong></h3>
+                    <strong>
+                        <h3>{{ dataArray.sourceBranchName }} <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true"></i> {{ dataArray.destinationBranchName }}
+                        </h3>
+                    </strong>
+                    <h3>
+                        Commit: <strong>{{ dataArray.commitHash }}</strong>
+                    </h3>
                 </div>
                 <div class="col-lg-12 text-center">
                     <h1><i class="fa fa-check-circle-o fa-3x text-success" aria-hidden="true"></i></h1>
@@ -32,8 +33,5 @@
             {% endif %}
         </div>
     </div>
-
-
-
 
 {% endblock %}

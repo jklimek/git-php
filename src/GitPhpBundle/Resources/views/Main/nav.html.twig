@@ -21,7 +21,8 @@
                             data-target="#commitModal" role="button">
                         <i class="fa fa-git" aria-hidden="true"></i> Commit files
                     </button>
-                    <button id="mergeRequestButton" class="btn btn-info" data-toggle="modal" {% if app.request.get('_route') != 'gitphp_main_list' %}disabled="disabled"{% endif %}
+                    <button id="mergeRequestButton" class="btn btn-info" data-toggle="modal"
+                            {% if app.request.get('_route') != 'gitphp_main_list' %}disabled="disabled"{% endif %}
                             role="button">
                         <i class="fa fa-code-fork" aria-hidden="true"></i> Merge request
                     </button>
