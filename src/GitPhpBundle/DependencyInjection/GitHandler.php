@@ -16,18 +16,27 @@ use Exception;
 class GitHandler
 {
     private $repo;
+    /**
+     * @var FileHandler
+     */
     private $fileHandlerService;
+    /**
+     * @var Helpers
+     */
+    private $helpersService;
 
     /**
      * GitHandler constructor.
      *
      * @param string $repositoryPath
      * @param FileHandler $fileHandlerService
+     * @param Helpers $helpersService
      */
-    public function __construct($repositoryPath, $fileHandlerService)
+    public function __construct($repositoryPath, $fileHandlerService, $helpersService)
     {
         $this->repo = Git::open($repositoryPath);
         $this->fileHandlerService = $fileHandlerService;
+        $this->helpersService = $helpersService;
     }
 
     /**
@@ -59,31 +68,9 @@ class GitHandler
     public function listFiles()
     {
         $filesListString = $this->repo->run('ls-files');
-        $filesListArray = [];
         $filesListExplodedString = explode("\n", $filesListString);
 
-        // Generate multidimensional array with keys for each dir
-        foreach ($filesListExplodedString as $filePathString) {
-            if ($filePathString != "") {
-
-                // Make array from each path dir
-                $filePathArray = explode("/", $filePathString);
-                $fileCount = count($filePathArray);
-                $tmpFileListArray = &$filesListArray;
-
-                for ($i = 1; $i < $fileCount; $i++) {
-
-                    // Create empty array if previous index does not exist but should
-                    if (!isset($tmpFileListArray[$filePathArray[$i - 1]])) {
-                        $tmpFileListArray[$filePathArray[$i - 1]] = [];
-                    }
-                    // Update result array with key
-                    $tmpFileListArray = &$tmpFileListArray[$filePathArray[$i - 1]];
-                }
-                // Add actual file
-                $tmpFileListArray[] = $filePathArray[$i - 1];
-            }
-        }
+        $filesListArray = $this->helpersService->pathToArray($filesListExplodedString);
 
         $newFilesListArray = preg_split("#\n#", trim($this->repo->run('diff --cached --name-only --diff-filter=A')),
             null, PREG_SPLIT_NO_EMPTY);

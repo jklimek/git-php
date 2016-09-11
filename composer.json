@@ -29,7 +29,9 @@
     "symfony/assetic-bundle": "^2.7",
     "twbs/bootstrap": "^3.0",
     "coyl/git": "^0.1.6"
-
+  },
+  "require-dev": {
+    "codeception/codeception": "^2.2"
   },
   "scripts": {
     "post-install-cmd": [
