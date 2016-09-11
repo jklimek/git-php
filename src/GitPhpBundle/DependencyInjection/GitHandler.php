@@ -54,21 +54,25 @@ class GitHandler
      * Generate array with files list
      * repo files, modified files, new files and deleted files respectively
      *
-     * @return array Array containing files lists
+     * @return array[] Array containing files lists
      */
     public function listFiles()
     {
         $filesListString = $this->repo->run('ls-files');
         $filesListArray = [];
         $filesListExplodedString = explode("\n", $filesListString);
+
         // Generate multidimensional array with keys for each dir
         foreach ($filesListExplodedString as $filePathString) {
             if ($filePathString != "") {
+
                 // Make array from each path dir
                 $filePathArray = explode("/", $filePathString);
                 $fileCount = count($filePathArray);
                 $tmpFileListArray = &$filesListArray;
+
                 for ($i = 1; $i < $fileCount; $i++) {
+
                     // Create empty array if previous index does not exist but should
                     if (!isset($tmpFileListArray[$filePathArray[$i - 1]])) {
                         $tmpFileListArray[$filePathArray[$i - 1]] = [];

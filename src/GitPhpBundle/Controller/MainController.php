@@ -22,10 +22,11 @@ class MainController extends Controller
         $filesLists = $this->get("git_php.service.githandler")->listFiles();
         $activeBranch = $this->get("git_php.service.githandler")->getActiveBranch();
         $mergeRequests = $this->getDoctrine()->getManager()->getRepository("GitPhpBundle:MergeRequest")->findAll();
+
         return [
-            "status"       => $status,
-            "filesLists"   => $filesLists,
-            "activeBranch" => $activeBranch,
+            "status"        => $status,
+            "filesLists"    => $filesLists,
+            "activeBranch"  => $activeBranch,
             "mergeRequests" => $mergeRequests
         ];
     }
@@ -171,9 +172,9 @@ class MainController extends Controller
             $mergeRequestRepository->createMergeRequest($sourceBranchName, $commitHash, $destinationBranchName);
 
             $dataArray = [
-                "status" => "OK",
-                "commitHash" => $commitHash,
-                "sourceBranchName" => $sourceBranchName,
+                "status"                => "OK",
+                "commitHash"            => $commitHash,
+                "sourceBranchName"      => $sourceBranchName,
                 "destinationBranchName" => $destinationBranchName
             ];
         } catch (Exception $e) {
@@ -225,8 +226,8 @@ class MainController extends Controller
             ];
         } catch (Exception $e) {
             return new JsonResponse([
-                "status"   => "ERROR",
-                "error"    => $e->getMessage()
+                "status" => "ERROR",
+                "error"  => $e->getMessage()
             ]);
         }
 
@@ -242,13 +243,13 @@ class MainController extends Controller
 
         try {
             $fileDataArray = [
-                "status"   => "OK",
+                "status" => "OK",
                 "branch" => $this->get("git_php.service.githandler")->getActiveBranch(),
             ];
         } catch (Exception $e) {
             return new JsonResponse([
-                "status"   => "ERROR",
-                "error"    => $e->getMessage()
+                "status" => "ERROR",
+                "error"  => $e->getMessage()
             ]);
         }
 

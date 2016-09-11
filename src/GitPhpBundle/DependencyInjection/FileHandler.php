@@ -17,6 +17,13 @@ class FileHandler
 
     }
 
+    /**
+     * Method creates file in the filesystem based on $fileDataArray
+     *
+     * @param string[] $fileDataArray Array containing filePath and fileBody
+     * @return string status output
+     * @throws Exception
+     */
     public function createFile($fileDataArray)
     {
         // Create actual file in the filesystem
@@ -40,7 +47,7 @@ class FileHandler
     /**
      * Method creates (or opens if file exists) file and writes body to this file
      *
-     * @param $fileDataArray
+     * @param string[] $fileDataArray Array containing filePath and new fileBody
      */
     private function writeToFile($fileDataArray)
     {
@@ -49,6 +56,12 @@ class FileHandler
         fclose($fileHandler);
     }
 
+    /**
+     * Method for editing file with new body
+     *
+     * @param string[] $fileDataArray Array containing filePath and new fileBody
+     * @throws Exception
+     */
     public function editFile($fileDataArray)
     {
         if (file_exists($fileDataArray["filePath"])) {
@@ -58,6 +71,13 @@ class FileHandler
         }
     }
 
+    /**
+     * Method for getting file body for given path
+     *
+     * @param string[] $filePath File path
+     * @return string $fileBody File body string
+     * @throws Exception
+     */
     public function getFileBody($filePath)
     {
         try {
